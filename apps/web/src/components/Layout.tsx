@@ -37,7 +37,7 @@ export default function Layout({ children, onNewAlert }: LayoutProps) {
                 </svg>
               </div>
               <div>
-                <h1 className="text-xl font-bold tracking-tight">TucAlerta</h1>
+                <h1 className="text-xl font-bold tracking-tight">tucalerta</h1>
                 <p className="text-xs text-orange-100 hidden sm:block">
                   Alertas Ciudadanas de Tucumán
                 </p>
