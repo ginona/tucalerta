@@ -2,7 +2,7 @@ const DEVICE_ID_KEY = 'tucalerta_device_id';
 const VOTED_ALERTS_KEY = 'tucalerta_voted_alerts';
 const LAST_REPORT_KEY = 'tucalerta_last_report';
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
-const ONE_HOUR_MS = 1000; // TODO: cambiar a 60 * 60 * 1000 en producción
+const RATE_LIMIT_MS = 15 * 60 * 1000; // 15 minutos entre reportes
 
 interface VotedAlert {
   alertId: string;
@@ -135,7 +135,7 @@ export function canReport(): boolean {
   if (!lastReport) return true;
 
   const lastReportTime = parseInt(lastReport, 10);
-  return Date.now() - lastReportTime >= ONE_HOUR_MS;
+  return Date.now() - lastReportTime >= RATE_LIMIT_MS;
 }
 
 /**
@@ -151,7 +151,7 @@ export function getTimeUntilCanReport(): number {
 
   const lastReportTime = parseInt(lastReport, 10);
   const elapsed = Date.now() - lastReportTime;
-  const remaining = ONE_HOUR_MS - elapsed;
+  const remaining = RATE_LIMIT_MS - elapsed;
 
   return Math.max(0, Math.ceil(remaining / 60000));
 }

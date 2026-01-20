@@ -1,7 +1,8 @@
 import type { Alert, AlertType, CreateAlertDTO } from '@tucalerta/types';
 import { prisma } from '../lib/prisma';
 
-const ONE_HOUR_MS = 1000; // TODO: cambiar a 60 * 60 * 1000 en producción
+const RATE_LIMIT_MS = 15 * 60 * 1000; // 15 minutos entre reportes
+const ALERT_EXPIRY_HOURS = 24; // Las alertas expiran en 24 horas
 
 interface AlertFilters {
   type?: AlertType;
@@ -43,7 +44,15 @@ function transformAlert(dbAlert: any): Alert {
  * Obtiene lista de alertas con filtros opcionales
  */
 export async function getAlerts(filters: AlertFilters = {}): Promise<Alert[]> {
-  const where: any = {};
+  // Calcular fecha de expiración (24 horas atrás)
+  const expiryDate = new Date(Date.now() - ALERT_EXPIRY_HOURS * 60 * 60 * 1000);
+
+  const where: any = {
+    // Solo alertas de las últimas 24 horas
+    createdAt: {
+      gte: expiryDate,
+    },
+  };
 
   if (filters.type) {
     where.type = filters.type;
@@ -104,7 +113,7 @@ export async function canDeviceReport(deviceId: string): Promise<boolean> {
   }
 
   const timeSinceLastReport = Date.now() - deviceValidation.lastReportAt.getTime();
-  return timeSinceLastReport >= ONE_HOUR_MS;
+  return timeSinceLastReport >= RATE_LIMIT_MS;
 }
 
 /**
@@ -114,7 +123,7 @@ export async function createAlert(data: CreateAlertDTO, deviceId: string): Promi
   // Verificar rate limit
   const canReport = await canDeviceReport(deviceId);
   if (!canReport) {
-    const error = new Error('Debes esperar 1 hora entre reportes');
+    const error = new Error('Debes esperar 15 minutos entre reportes');
     (error as any).code = 'RATE_LIMIT';
     throw error;
   }
