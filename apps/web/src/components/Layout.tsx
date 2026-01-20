@@ -16,8 +16,26 @@ export default function Layout({ children, onNewAlert }: LayoutProps) {
       <header className="sticky top-0 z-40 bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="text-2xl">🚨</span>
+            <div className="flex items-center gap-2.5">
+              {/* Logo SVG */}
+              <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm">
+                <svg viewBox="0 0 32 32" className="w-7 h-7" fill="none">
+                  {/* Pin de ubicación */}
+                  <path 
+                    d="M16 2C10.5 2 6 6.5 6 12c0 7.5 10 18 10 18s10-10.5 10-18c0-5.5-4.5-10-10-10z" 
+                    fill="#ea580c"
+                  />
+                  {/* Círculo interior */}
+                  <circle cx="16" cy="12" r="4" fill="white"/>
+                  {/* Ondas de alerta */}
+                  <path 
+                    d="M16 8v4M14 10h4" 
+                    stroke="#ea580c" 
+                    strokeWidth="1.5" 
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
               <div>
                 <h1 className="text-xl font-bold tracking-tight">TucAlerta</h1>
                 <p className="text-xs text-orange-100 hidden sm:block">
@@ -107,7 +125,10 @@ export default function Layout({ children, onNewAlert }: LayoutProps) {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
             <div className="flex items-center gap-2">
-              <span className="text-lg">🚨</span>
+              <svg viewBox="0 0 32 32" className="w-5 h-5" fill="none">
+                <path d="M16 2C10.5 2 6 6.5 6 12c0 7.5 10 18 10 18s10-10.5 10-18c0-5.5-4.5-10-10-10z" fill="#f97316"/>
+                <circle cx="16" cy="12" r="3" fill="white"/>
+              </svg>
               <span className="font-medium text-white text-sm">TucAlerta</span>
               <span className="text-xs text-gray-500">|</span>
               <span className="text-xs text-gray-400">Proyecto ciudadano independiente</span>

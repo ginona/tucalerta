@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm install)",
+      "Bash(pnpm approve-builds:*)",
+      "Bash(pnpm config set:*)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm db:generate:*)",
+      "Bash(pnpm prisma migrate:*)",
+      "Bash(pnpm dev)",
+      "Bash(taskkill:*)",
+      "Bash(timeout:*)"
+    ]
+  }
+}
