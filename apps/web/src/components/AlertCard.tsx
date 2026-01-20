@@ -72,6 +72,11 @@ export default function AlertCard({ alert, onVote, compact = false }: AlertCardP
         </span>
       </div>
 
+      {/* Disclaimer */}
+      <p className="text-xs text-gray-400 mb-2 italic">
+        Reporte ciudadano — no verificado
+      </p>
+
       {/* Status badges */}
       {alert.isVerified && (
         <div className="mb-2 px-2 py-1 bg-green-100 text-green-800 text-xs rounded-md inline-flex items-center gap-1">
@@ -84,13 +89,8 @@ export default function AlertCard({ alert, onVote, compact = false }: AlertCardP
         </div>
       )}
 
-      {/* Description */}
-      <p className={`text-gray-700 mb-3 ${compact ? 'text-xs line-clamp-2' : 'text-sm line-clamp-3'}`}>
-        {alert.description}
-      </p>
-
       {/* Timestamp */}
-      <p className="text-xs text-gray-400 mb-3">{timeAgo}</p>
+      <p className="text-xs text-gray-500 mb-3">⏱️ {timeAgo}</p>
 
       {/* Voting section */}
       <div className="flex items-center justify-between pt-3 border-t border-gray-100">

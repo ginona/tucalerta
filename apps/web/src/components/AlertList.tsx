@@ -52,16 +52,16 @@ export default function AlertList({ alerts, isLoading, onVote, onAlertClick }: A
                   {filteredAlerts.filter(a => !a.autoHidden).slice(0, 10).map((alert) => (
                     <span key={alert.id} className="inline-flex items-center gap-1.5 text-sm text-gray-700">
                       <span>{getAlertIcon(alert.type)}</span>
-                      <span className="font-medium">{alert.locality.name}:</span>
-                      <span className="text-gray-600 max-w-[150px] truncate">{alert.description}</span>
+                      <span className="font-medium">{alert.locality.name}</span>
+                      <span className="text-gray-400 text-xs">({ALERT_TYPE_LABELS[alert.type]})</span>
                     </span>
                   ))}
                   {/* Duplicate for seamless loop */}
                   {filteredAlerts.filter(a => !a.autoHidden).slice(0, 10).map((alert) => (
                     <span key={`dup-${alert.id}`} className="inline-flex items-center gap-1.5 text-sm text-gray-700">
                       <span>{getAlertIcon(alert.type)}</span>
-                      <span className="font-medium">{alert.locality.name}:</span>
-                      <span className="text-gray-600 max-w-[150px] truncate">{alert.description}</span>
+                      <span className="font-medium">{alert.locality.name}</span>
+                      <span className="text-gray-400 text-xs">({ALERT_TYPE_LABELS[alert.type]})</span>
                     </span>
                   ))}
                 </div>

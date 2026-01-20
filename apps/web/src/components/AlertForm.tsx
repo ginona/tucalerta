@@ -16,7 +16,6 @@ type FormStatus = 'idle' | 'loading' | 'success' | 'error';
 export default function AlertForm({ isOpen, onClose, onSubmit, selectedPosition }: AlertFormProps) {
   const [type, setType] = useState<AlertType>('flood');
   const [localityId, setLocalityId] = useState('');
-  const [description, setDescription] = useState('');
   const [severity, setSeverity] = useState<AlertSeverity>(2);
   const [status, setStatus] = useState<FormStatus>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -131,12 +130,6 @@ export default function AlertForm({ isOpen, onClose, onSubmit, selectedPosition 
       return;
     }
 
-    if (description.length < 10) {
-      setErrorMessage('La descripción debe tener al menos 10 caracteres');
-      setStatus('error');
-      return;
-    }
-
     if (!canSubmit) {
       setErrorMessage(`Debes esperar ${timeRemaining} minutos para reportar otra alerta`);
       setStatus('error');
@@ -151,7 +144,7 @@ export default function AlertForm({ isOpen, onClose, onSubmit, selectedPosition 
         type,
         localityId,
         coordinates: selectedPosition,
-        description: description.trim(),
+        description: 'Reporte ciudadano',
         severity,
         deviceId: getDeviceId(),
       });
@@ -331,23 +324,6 @@ export default function AlertForm({ isOpen, onClose, onSubmit, selectedPosition 
             </div>
 
             {/* Description */}
-            <div className="space-y-2">
-              <label htmlFor="description" className="block text-sm font-semibold text-gray-700">
-                Descripción
-              </label>
-              <textarea
-                id="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value.slice(0, 500))}
-                placeholder="Describe brevemente la situación..."
-                rows={3}
-                className="w-full px-4 py-3.5 text-base border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 resize-none"
-              />
-              <p className={`text-xs text-right transition-colors ${description.length > 450 ? 'text-amber-600 font-medium' : 'text-gray-400'}`}>
-                {description.length}/500
-              </p>
-            </div>
-
             {/* Severity */}
             <fieldset className="space-y-2">
               <legend className="block text-sm font-semibold text-gray-700">
