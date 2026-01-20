@@ -81,14 +81,17 @@ export function errorHandler(
   }
 
   // Errores de la aplicación con código conocido
-  if (err.code && ERROR_STATUS_MAP[err.code]) {
-    res.status(ERROR_STATUS_MAP[err.code]).json({
-      error: err.message,
-      code: err.code,
-      message: err.message,
-      ...(isDevelopment && { stack: err.stack }),
-    });
-    return;
+  if (err.code) {
+    const statusCode = ERROR_STATUS_MAP[err.code];
+    if (statusCode) {
+      res.status(statusCode).json({
+        error: err.message,
+        code: err.code,
+        message: err.message,
+        ...(isDevelopment && { stack: err.stack }),
+      });
+      return;
+    }
   }
 
   // Error genérico 500

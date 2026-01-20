@@ -1,9 +1,9 @@
-import { Router } from 'express';
+import { Router, type IRouter } from 'express';
 import * as alertController from '../controllers/alertController';
 import { checkReportRateLimit, checkVoteRateLimit } from '../middleware/rateLimit';
 import { validateCreateAlert, validateVote } from '../middleware/validation';
 
-const router = Router();
+const router: IRouter = Router();
 
 /**
  * GET /alerts

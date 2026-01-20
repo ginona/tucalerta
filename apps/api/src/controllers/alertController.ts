@@ -37,7 +37,7 @@ export async function getAlertById(
   next: NextFunction,
 ): Promise<void> {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     const alert = await alertService.getAlertById(id);
     res.status(200).json(alert);
   } catch (error) {
@@ -87,7 +87,7 @@ export async function voteAlert(
   next: NextFunction,
 ): Promise<void> {
   try {
-    const { id: alertId } = req.params;
+    const alertId = req.params.id as string;
     const deviceId = (req as any).deviceId as string;
     const { voteType } = req.body;
 

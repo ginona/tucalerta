@@ -1,4 +1,5 @@
 import type { Alert, AlertType, CreateAlertDTO } from '@tucalerta/types';
+import type { Prisma } from '@prisma/client';
 import { prisma } from '../lib/prisma';
 
 const RATE_LIMIT_MS = 15 * 60 * 1000; // 15 minutos entre reportes
@@ -140,7 +141,7 @@ export async function createAlert(data: CreateAlertDTO, deviceId: string): Promi
   }
 
   // Crear alerta y actualizar device validation en una transacción
-  const result = await prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
     // Crear la alerta
     const alert = await tx.alert.create({
       data: {
@@ -224,7 +225,7 @@ export async function voteAlert(
   const autoHidden = newValidationScore <= -3;
 
   // Actualizar en transacción
-  const result = await prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
     // Actualizar alerta
     const updatedAlert = await tx.alert.update({
       where: { id: alertId },
