@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Tipos de alerta
+enum AlertType {
+  flood
+  power_outage
+}
+
+// Estados de alerta
+enum AlertStatus {
+  active
+  resolved
+  investigating
+}
+
+// Localidades de Tucumán
+model Locality {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  latitude    Float
+  longitude   Float
+  province    String   @default("tucuman")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  alerts      Alert[]
+
+  @@map("localities")
+}
+
+// Alertas ciudadanas
+model Alert {
+  id                  String      @id @default(cuid())
+  type                AlertType
+  description         String
+  latitude            Float
+  longitude           Float
+  severity            Int         @db.SmallInt // 1, 2, 3
+  status              AlertStatus @default(active)
+  confirmations       Int         @default(0)
+  rejections          Int         @default(0)
+  validationScore     Int         @default(0) @map("validation_score")
+  autoHidden          Boolean     @default(false) @map("auto_hidden")
+  isVerified          Boolean     @default(false) @map("is_verified")
+  deviceFingerprints  String[]    @map("device_fingerprints")
+  reportedBy          String      @map("reported_by")
+  imageUrl            String?     @map("image_url")
+  createdAt           DateTime    @default(now()) @map("created_at")
+  updatedAt           DateTime    @updatedAt @map("updated_at")
+
+  locality            Locality    @relation(fields: [localityId], references: [id])
+  localityId          String      @map("locality_id")
+  votes               Vote[]
+
+  @@index([localityId])
+  @@index([status])
+  @@index([type])
+  @@index([autoHidden])
+  @@index([createdAt])
+  @@map("alerts")
+}
+
+// Votos en alertas
+model Vote {
+  id        String   @id @default(cuid())
+  alertId   String   @map("alert_id")
+  deviceId  String   @map("device_id")
+  voteType  String   @map("vote_type") // 'confirm' | 'reject'
+  createdAt DateTime @default(now()) @map("created_at")
+
+  alert     Alert    @relation(fields: [alertId], references: [id], onDelete: Cascade)
+
+  @@unique([alertId, deviceId]) // Un device solo puede votar una vez por alerta
+  @@index([deviceId])
+  @@map("votes")
+}
+
+// Validación de dispositivos (rate limiting)
+model DeviceValidation {
+  id           String    @id @default(cuid())
+  deviceId     String    @unique @map("device_id")
+  lastReportAt DateTime? @map("last_report_at")
+  lastVoteAt   DateTime? @map("last_vote_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  @@map("device_validations")
+}
