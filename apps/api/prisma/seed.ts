@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const localities = [
   // Gran San Miguel de Tucumán
   { name: 'San Miguel de Tucumán', latitude: -26.8083, longitude: -65.2176, province: 'tucuman' },
-  { name: 'Yerba Buena', latitude: -26.8167, longitude: -65.3167, province: 'tucuman' },
+  { name: 'Yerba Buena', latitude: -26.825, longitude: -65.29, province: 'tucuman' },
   { name: 'Tafí Viejo', latitude: -26.7333, longitude: -65.2667, province: 'tucuman' },
   { name: 'Banda del Río Salí', latitude: -26.8333, longitude: -65.1833, province: 'tucuman' },
   { name: 'Las Talitas', latitude: -26.7667, longitude: -65.2, province: 'tucuman' },

@@ -45,7 +45,7 @@ export const LOCALITIES: Locality[] = [
   {
     id: 'yerba-buena',
     name: 'Yerba Buena',
-    coordinates: [-26.8167, -65.3167],
+    coordinates: [-26.8250, -65.2900],
     province: 'tucuman',
   },
   {

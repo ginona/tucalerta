@@ -283,7 +283,12 @@ export default function AlertForm({ isOpen, onClose, onSubmit, selectedPosition 
             {selectedPosition ? (
               <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center gap-3">
                 <span className="text-xl">📍</span>
-                <p className="font-medium text-emerald-800">Ubicación seleccionada</p>
+                <div>
+                  <p className="font-medium text-emerald-800">Ubicación seleccionada</p>
+                  <p className="text-xs text-emerald-600/70 font-mono mt-0.5">
+                    {selectedPosition[0].toFixed(5)}, {selectedPosition[1].toFixed(5)}
+                  </p>
+                </div>
               </div>
             ) : (
               <div className="p-4 bg-orange-50 border border-orange-200 rounded-2xl flex items-center gap-3">

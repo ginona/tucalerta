@@ -28,8 +28,8 @@ export function useAlerts(options: UseAlertsOptions = {}) {
   const alertsQuery = useQuery({
     queryKey: ['alerts', activeFilters],
     queryFn: () => api.getAlerts(activeFilters),
-    staleTime: 30000, // 30 segundos
-    refetchInterval: 60000, // 1 minuto para updates automáticos
+    staleTime: 60000, // 1 minuto
+    refetchInterval: 120000, // 2 minutos para updates automáticos
   });
 
   // Mutation para crear alerta
