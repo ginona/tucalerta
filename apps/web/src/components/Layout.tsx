@@ -43,14 +43,14 @@ export default function Layout({ children }: LayoutProps) {
               </div>
             </div>
 
-            {/* Desktop buttons */}
-            <div className="flex items-center gap-3">
-              <span className="text-xs text-orange-100 bg-orange-600/50 px-2 py-1 rounded-full">
-                📍 Tocá el mapa para alertar
+            {/* Header actions */}
+            <div className="flex items-center gap-2 sm:gap-3">
+              <span className="text-[10px] sm:text-xs text-orange-100 bg-orange-600/50 px-2 py-1 rounded-full whitespace-nowrap">
+                📍 Tocá el mapa
               </span>
               <button
                 onClick={() => setIsEmergencyOpen(true)}
-                className="flex items-center gap-1.5 px-3 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors text-sm"
+                className="flex items-center justify-center w-9 h-9 sm:w-auto sm:h-auto sm:gap-1.5 sm:px-3 sm:py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors text-sm"
               >
                 <span>🆘</span>
                 <span className="hidden sm:inline">Emergencia</span>
