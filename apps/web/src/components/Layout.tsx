@@ -71,17 +71,6 @@ export default function Layout({ children, onNewAlert }: LayoutProps) {
       {/* Main content */}
       <main className="flex-1 relative">{children}</main>
 
-      {/* Mobile FAB - New Alert only */}
-      {onNewAlert && (
-        <button
-          onClick={onNewAlert}
-          className="sm:hidden fixed bottom-16 right-4 z-20 w-14 h-14 bg-orange-500 text-white rounded-full shadow-lg flex items-center justify-center text-2xl hover:bg-orange-600 active:scale-95 transition-all"
-          aria-label="Nueva alerta"
-        >
-          +
-        </button>
-      )}
-
       {/* Sticky Emergency Bar - always visible */}
       <div className="sticky bottom-0 z-30 bg-red-600 text-white shadow-[0_-4px_12px_rgba(0,0,0,0.15)]">
         <button
