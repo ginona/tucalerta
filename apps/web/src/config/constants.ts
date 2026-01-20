@@ -35,6 +35,7 @@ export const TUCUMAN_BOUNDS: [[number, number], [number, number]] = [
  * Coordenadas del centro de cada localidad
  */
 export const LOCALITIES: Locality[] = [
+  // Gran San Miguel de Tucumán
   {
     id: 'san-miguel-de-tucuman',
     name: 'San Miguel de Tucumán',
@@ -72,9 +73,95 @@ export const LOCALITIES: Locality[] = [
     province: 'tucuman',
   },
   {
-    id: 'concepcion',
-    name: 'Concepción',
-    coordinates: [-27.3439, -65.5897],
+    id: 'el-manantial',
+    name: 'El Manantial',
+    coordinates: [-26.8380, -65.3050],
+    province: 'tucuman',
+  },
+  {
+    id: 'san-pablo',
+    name: 'San Pablo',
+    coordinates: [-26.8750, -65.3000],
+    province: 'tucuman',
+  },
+  {
+    id: 'cevil-redondo',
+    name: 'Cevil Redondo',
+    coordinates: [-26.8500, -65.1667],
+    province: 'tucuman',
+  },
+  {
+    id: 'lastenia',
+    name: 'Lastenia',
+    coordinates: [-26.8333, -65.1500],
+    province: 'tucuman',
+  },
+  {
+    id: 'delfin-gallo',
+    name: 'Delfín Gallo',
+    coordinates: [-26.8000, -65.1500],
+    province: 'tucuman',
+  },
+  {
+    id: 'colombres',
+    name: 'Colombres',
+    coordinates: [-26.7833, -65.1167],
+    province: 'tucuman',
+  },
+  {
+    id: 'los-pocitos',
+    name: 'Los Pocitos',
+    coordinates: [-26.7500, -65.2333],
+    province: 'tucuman',
+  },
+  {
+    id: 'villa-carmela',
+    name: 'Villa Carmela',
+    coordinates: [-26.7500, -65.2500],
+    province: 'tucuman',
+  },
+  {
+    id: 'el-cadillal',
+    name: 'El Cadillal',
+    coordinates: [-26.6333, -65.2000],
+    province: 'tucuman',
+  },
+  {
+    id: 'san-javier',
+    name: 'San Javier',
+    coordinates: [-26.7833, -65.3667],
+    province: 'tucuman',
+  },
+  {
+    id: 'villa-nougues',
+    name: 'Villa Nougués',
+    coordinates: [-26.8500, -65.3667],
+    province: 'tucuman',
+  },
+  // Lules y alrededores
+  {
+    id: 'lules',
+    name: 'Lules',
+    coordinates: [-26.9333, -65.3333],
+    province: 'tucuman',
+  },
+  {
+    id: 'san-isidro-de-lules',
+    name: 'San Isidro de Lules',
+    coordinates: [-26.9167, -65.3000],
+    province: 'tucuman',
+  },
+  {
+    id: 'la-reduccion',
+    name: 'La Reducción',
+    coordinates: [-26.9500, -65.3167],
+    province: 'tucuman',
+  },
+  // Sur de Tucumán
+  {
+    id: 'famailla',
+    name: 'Famaillá',
+    coordinates: [-27.0500, -65.4000],
     province: 'tucuman',
   },
   {
@@ -84,9 +171,9 @@ export const LOCALITIES: Locality[] = [
     province: 'tucuman',
   },
   {
-    id: 'famailla',
-    name: 'Famaillá',
-    coordinates: [-27.0500, -65.4000],
+    id: 'concepcion',
+    name: 'Concepción',
+    coordinates: [-27.3439, -65.5897],
     province: 'tucuman',
   },
   {
@@ -96,15 +183,58 @@ export const LOCALITIES: Locality[] = [
     province: 'tucuman',
   },
   {
-    id: 'lules',
-    name: 'Lules',
-    coordinates: [-26.9333, -65.3333],
-    province: 'tucuman',
-  },
-  {
     id: 'simoca',
     name: 'Simoca',
     coordinates: [-27.2667, -65.3500],
+    province: 'tucuman',
+  },
+  {
+    id: 'juan-bautista-alberdi',
+    name: 'Juan Bautista Alberdi',
+    coordinates: [-27.5833, -65.6167],
+    province: 'tucuman',
+  },
+  {
+    id: 'la-cocha',
+    name: 'La Cocha',
+    coordinates: [-27.7667, -65.5833],
+    province: 'tucuman',
+  },
+  {
+    id: 'bella-vista',
+    name: 'Bella Vista',
+    coordinates: [-27.0333, -65.3000],
+    province: 'tucuman',
+  },
+  // Norte y Oeste
+  {
+    id: 'tafi-del-valle',
+    name: 'Tafí del Valle',
+    coordinates: [-26.8500, -65.7167],
+    province: 'tucuman',
+  },
+  {
+    id: 'raco',
+    name: 'Raco',
+    coordinates: [-26.6667, -65.3833],
+    province: 'tucuman',
+  },
+  {
+    id: 'trancas',
+    name: 'Trancas',
+    coordinates: [-26.2333, -65.2833],
+    province: 'tucuman',
+  },
+  {
+    id: 'san-pedro-de-colalao',
+    name: 'San Pedro de Colalao',
+    coordinates: [-26.2333, -65.4833],
+    province: 'tucuman',
+  },
+  {
+    id: 'burruyacu',
+    name: 'Burruyacú',
+    coordinates: [-26.5000, -64.7500],
     province: 'tucuman',
   },
 ];

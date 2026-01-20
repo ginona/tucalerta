@@ -1,6 +1,6 @@
 import type { AlertSeverity, AlertType, CreateAlertDTO, Locality } from '@tucalerta/types';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ALERT_TYPE_LABELS, SEVERITY_LABELS } from '@/config/constants';
+import { ALERT_TYPE_LABELS, SEVERITY_LABELS, LOCALITIES } from '@/config/constants';
 import { canReport, getDeviceId, getTimeUntilCanReport, recordReport } from '@/lib/fingerprint';
 import { api } from '@/lib/api';
 
@@ -32,6 +32,39 @@ export default function AlertForm({ isOpen, onClose, onSubmit, selectedPosition 
   useEffect(() => {
     api.getLocalities().then(setLocalities).catch(console.error);
   }, []);
+
+  // Calcular distancia entre dos puntos (aproximación simple)
+  const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+    const dLat = lat2 - lat1;
+    const dLon = lon2 - lon1;
+    return Math.sqrt(dLat * dLat + dLon * dLon);
+  };
+
+  // Inferir localidad más cercana cuando cambian las coordenadas
+  // Usa LOCALITIES del frontend para mayor precisión (tiene más localidades)
+  useEffect(() => {
+    if (!selectedPosition || LOCALITIES.length === 0) return;
+
+    const [lat, lon] = selectedPosition;
+    let closestLocality = LOCALITIES[0];
+    let minDistance = Infinity;
+
+    for (const locality of LOCALITIES) {
+      const distance = getDistance(lat, lon, locality.coordinates[0], locality.coordinates[1]);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestLocality = locality;
+      }
+    }
+
+    if (closestLocality) {
+      // Buscar el ID correspondiente en las localidades de la API
+      const apiLocality = localities.find(l => l.name === closestLocality.name);
+      if (apiLocality) {
+        setLocalityId(apiLocality.id);
+      }
+    }
+  }, [selectedPosition, localities]);
 
   // Bloquear scroll del body cuando el modal está abierto
   useEffect(() => {
@@ -248,24 +281,14 @@ export default function AlertForm({ isOpen, onClose, onSubmit, selectedPosition 
 
             {/* Selected position indicator */}
             {selectedPosition ? (
-              <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-start gap-3">
+              <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center gap-3">
                 <span className="text-xl">📍</span>
-                <div>
-                  <p className="font-medium text-emerald-800">Ubicación seleccionada</p>
-                  <p className="text-sm text-emerald-700 font-mono mt-0.5">
-                    {selectedPosition[0].toFixed(5)}, {selectedPosition[1].toFixed(5)}
-                  </p>
-                </div>
+                <p className="font-medium text-emerald-800">Ubicación seleccionada</p>
               </div>
             ) : (
-              <div className="p-4 bg-orange-50 border border-orange-200 rounded-2xl flex items-start gap-3">
+              <div className="p-4 bg-orange-50 border border-orange-200 rounded-2xl flex items-center gap-3">
                 <span className="text-xl">👆</span>
-                <div>
-                  <p className="font-medium text-orange-800">Selecciona ubicación</p>
-                  <p className="text-sm text-orange-700 mt-0.5">
-                    Toca en el mapa para marcar el punto exacto
-                  </p>
-                </div>
+                <p className="font-medium text-orange-800">Tocá en el mapa para marcar el punto</p>
               </div>
             )}
 
