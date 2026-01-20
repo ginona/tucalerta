@@ -1,4 +1,4 @@
-import type { Alert, AlertType, CreateAlertDTO } from '@tucalerta/types';
+import type { AlertType, CreateAlertDTO } from '@tucalerta/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { api } from '@/lib/api';
 import { useAlertStore } from '@/store/alertStore';

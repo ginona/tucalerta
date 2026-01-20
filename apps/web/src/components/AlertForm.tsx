@@ -67,7 +67,6 @@ export default function AlertForm({ isOpen, onClose, onSubmit, selectedPosition 
   const resetForm = () => {
     setType('flood');
     setLocalityId('');
-    setDescription('');
     setSeverity(2);
     setStatus('idle');
     setErrorMessage('');
@@ -88,6 +87,7 @@ export default function AlertForm({ isOpen, onClose, onSubmit, selectedPosition 
   // Touch handlers for drag to dismiss
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     const touch = e.touches[0];
+    if (!touch) return;
     startYRef.current = touch.clientY;
     currentYRef.current = touch.clientY;
     setIsDragging(true);
@@ -96,6 +96,7 @@ export default function AlertForm({ isOpen, onClose, onSubmit, selectedPosition 
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
     if (!isDragging) return;
     const touch = e.touches[0];
+    if (!touch) return;
     currentYRef.current = touch.clientY;
     const deltaY = Math.max(0, touch.clientY - startYRef.current);
     setDragY(deltaY);

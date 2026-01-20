@@ -3,7 +3,6 @@ import { Component, type ErrorInfo, type ReactNode } from 'react';
 import { AlertForm, AlertList, Layout, Map } from '@/components';
 import { useAlerts } from '@/hooks/useAlerts';
 import { useVote } from '@/hooks/useVote';
-import { api } from '@/lib/api';
 import { useAlertStore } from '@/store/alertStore';
 
 // =============================================================================
@@ -97,8 +96,8 @@ function Toast({ message, type, onClose }: { message: string; type: 'success' | 
 
 function AppContent() {
   const { isFormOpen, formCoordinates, openForm, closeForm } = useAlertStore();
-  const { alerts, isLoading, createAlert, isCreating } = useAlerts();
-  const { vote, isVoting } = useVote();
+  const { alerts, isLoading, createAlert } = useAlerts();
+  const { vote } = useVote();
 
   // Toast state
   const [toast, setToast] = React.useState<{ message: string; type: 'success' | 'error' } | null>(null);

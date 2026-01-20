@@ -7,7 +7,7 @@ import {
   SEVERITY_COLORS,
   SEVERITY_LABELS,
 } from '@/config/constants';
-import { getDeviceId, hasVoted, recordVote } from '@/lib/fingerprint';
+import { hasVoted, recordVote } from '@/lib/fingerprint';
 
 interface AlertCardProps {
   alert: Alert;
