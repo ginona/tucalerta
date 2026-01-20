@@ -134,8 +134,20 @@ export default function Layout({ children, onNewAlert }: LayoutProps) {
               <span className="text-xs text-gray-400">Proyecto ciudadano independiente</span>
             </div>
             
-            <div className="flex items-center gap-4 text-xs text-gray-500">
+            <div className="flex items-center gap-3 text-xs text-gray-500">
               <span>© {currentYear}</span>
+              <span>•</span>
+              <span>
+                Diseñado por{' '}
+                <a 
+                  href="https://linkedin.com/in/ginonacchio" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-orange-400 hover:text-orange-300 transition-colors"
+                >
+                  Gino Nacchio
+                </a>
+              </span>
             </div>
           </div>
 
