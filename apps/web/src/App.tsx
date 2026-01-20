@@ -138,7 +138,7 @@ function AppContent() {
   };
 
   return (
-    <Layout onNewAlert={handleNewAlert}>
+    <Layout>
       {/* Toast */}
       {toast && (
         <Toast

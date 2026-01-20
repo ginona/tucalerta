@@ -2,7 +2,7 @@ import type { Alert, AlertType, CreateAlertDTO } from '@tucalerta/types';
 import type { Prisma } from '@prisma/client';
 import { prisma } from '../lib/prisma';
 
-const RATE_LIMIT_MS = 15 * 60 * 1000; // 15 minutos entre reportes
+const RATE_LIMIT_MS = 45 * 60 * 1000; // 45 minutos entre reportes
 const ALERT_EXPIRY_HOURS = 24; // Las alertas expiran en 24 horas
 
 interface AlertFilters {
@@ -124,7 +124,7 @@ export async function createAlert(data: CreateAlertDTO, deviceId: string): Promi
   // Verificar rate limit
   const canReport = await canDeviceReport(deviceId);
   if (!canReport) {
-    const error = new Error('Debes esperar 15 minutos entre reportes');
+    const error = new Error('Debes esperar 45 minutos entre reportes');
     (error as any).code = 'RATE_LIMIT';
     throw error;
   }

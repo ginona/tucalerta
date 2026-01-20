@@ -3,10 +3,9 @@ import EmergencyModal from './EmergencyModal';
 
 interface LayoutProps {
   children: ReactNode;
-  onNewAlert?: () => void;
 }
 
-export default function Layout({ children, onNewAlert }: LayoutProps) {
+export default function Layout({ children }: LayoutProps) {
   const currentYear = new Date().getFullYear();
   const [isEmergencyOpen, setIsEmergencyOpen] = useState(false);
 
@@ -45,24 +44,17 @@ export default function Layout({ children, onNewAlert }: LayoutProps) {
             </div>
 
             {/* Desktop buttons */}
-            <div className="hidden sm:flex items-center gap-2">
+            <div className="flex items-center gap-3">
+              <span className="text-xs text-orange-100 bg-orange-600/50 px-2 py-1 rounded-full">
+                📍 Tocá el mapa para alertar
+              </span>
               <button
                 onClick={() => setIsEmergencyOpen(true)}
                 className="flex items-center gap-1.5 px-3 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors text-sm"
               >
                 <span>🆘</span>
-                Emergencia
+                <span className="hidden sm:inline">Emergencia</span>
               </button>
-
-              {onNewAlert && (
-                <button
-                  onClick={onNewAlert}
-                  className="flex items-center gap-2 px-4 py-2 bg-white text-orange-600 rounded-lg font-medium hover:bg-orange-50 transition-colors"
-                >
-                  <span>+</span>
-                  Nueva Alerta
-                </button>
-              )}
             </div>
           </div>
         </div>

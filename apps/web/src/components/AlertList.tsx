@@ -19,7 +19,7 @@ export default function AlertList({ alerts, isLoading, onVote, onAlertClick }: A
   // Apply filters
   const filteredAlerts = alerts.filter((alert) => {
     if (typeFilter !== 'all' && alert.type !== typeFilter) return false;
-    if (localityFilter !== 'all' && alert.locality.id !== localityFilter) return false;
+    if (localityFilter !== 'all' && alert.locality.name !== localityFilter) return false;
     if (!showHidden && alert.autoHidden) return false;
     return true;
   });
@@ -128,7 +128,7 @@ export default function AlertList({ alerts, isLoading, onVote, onAlertClick }: A
                 >
                   <option value="all">Todas las localidades</option>
                   {LOCALITIES.map((locality) => (
-                    <option key={locality.id} value={locality.id}>
+                    <option key={locality.id} value={locality.name}>
                       {locality.name}
                     </option>
                   ))}
@@ -196,7 +196,7 @@ export default function AlertList({ alerts, isLoading, onVote, onAlertClick }: A
             >
               <option value="all">Todas las localidades</option>
               {LOCALITIES.map((locality) => (
-                <option key={locality.id} value={locality.id}>
+                <option key={locality.id} value={locality.name}>
                   {locality.name}
                 </option>
               ))}

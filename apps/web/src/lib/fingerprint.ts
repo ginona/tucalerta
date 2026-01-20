@@ -2,7 +2,7 @@ const DEVICE_ID_KEY = 'tucalerta_device_id';
 const VOTED_ALERTS_KEY = 'tucalerta_voted_alerts';
 const LAST_REPORT_KEY = 'tucalerta_last_report';
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
-const RATE_LIMIT_MS = 15 * 60 * 1000; // 15 minutos entre reportes
+const RATE_LIMIT_MS = 45 * 60 * 1000; // 45 minutos entre reportes
 
 interface VotedAlert {
   alertId: string;
