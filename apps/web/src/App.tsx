@@ -111,10 +111,6 @@ function AppContent() {
     openForm([lat, lng]);
   };
 
-  const handleNewAlert = () => {
-    openForm();
-  };
-
   const handleCreateAlert = async (data: Parameters<typeof createAlert>[0]) => {
     try {
       await createAlert(data);
