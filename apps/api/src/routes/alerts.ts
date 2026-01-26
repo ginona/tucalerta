@@ -1,6 +1,6 @@
 import { Router, type IRouter } from 'express';
 import * as alertController from '../controllers/alertController';
-import { checkReportRateLimit, checkVoteRateLimit } from '../middleware/rateLimit';
+import { checkGlobalRateLimit, checkReportRateLimit, checkVoteRateLimit } from '../middleware/rateLimit';
 import { validateCreateAlert, validateVote } from '../middleware/validation';
 
 const router: IRouter = Router();
@@ -25,6 +25,7 @@ router.get('/:id', alertController.getAlertById);
  */
 router.post(
   '/',
+  checkGlobalRateLimit, // Anti-DDoS: máx 10 alertas/min global
   validateCreateAlert,
   checkReportRateLimit,
   alertController.createAlert,

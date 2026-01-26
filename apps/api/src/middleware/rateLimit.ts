@@ -1,6 +1,44 @@
 import type { NextFunction, Request, Response } from 'express';
 import * as alertService from '../services/alertService';
 
+// === RATE LIMIT GLOBAL (anti-DDoS) ===
+const GLOBAL_LIMIT = 5; // máx alertas por ventana
+const WINDOW_MS = 60 * 1000; // 1 minuto
+const alertTimestamps: number[] = [];
+
+function isGlobalRateLimited(): boolean {
+  const now = Date.now();
+  // Limpiar timestamps viejos
+  while (alertTimestamps.length > 0 && alertTimestamps[0] < now - WINDOW_MS) {
+    alertTimestamps.shift();
+  }
+  return alertTimestamps.length >= GLOBAL_LIMIT;
+}
+
+function recordAlert(): void {
+  alertTimestamps.push(Date.now());
+}
+
+/**
+ * Middleware para rate limit GLOBAL (protección anti-flood)
+ */
+export function checkGlobalRateLimit(
+  _req: Request,
+  res: Response,
+  next: NextFunction,
+): void {
+  if (isGlobalRateLimited()) {
+    res.status(429).json({
+      error: 'Servidor ocupado',
+      code: 'GLOBAL_RATE_LIMIT',
+      message: 'Demasiadas alertas en este momento. Intentá en 1 minuto.',
+    });
+    return;
+  }
+  recordAlert();
+  next();
+}
+
 /**
  * Middleware para verificar rate limit de reportes (1 por hora)
  */

@@ -120,14 +120,14 @@ export default function Layout({ children }: LayoutProps) {
               <span>•</span>
               <span>
                 Diseñado por{' '}
-                <a 
+              <a
                   href="https://linkedin.com/in/ginonacchio" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                target="_blank"
+                rel="noopener noreferrer"
                   className="text-orange-400 hover:text-orange-300 transition-colors"
-                >
+              >
                   Gino Nacchio
-                </a>
+              </a>
               </span>
             </div>
           </div>

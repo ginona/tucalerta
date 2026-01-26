@@ -95,73 +95,73 @@ export default function AlertList({ alerts, isLoading, onVote, onAlertClick }: A
             <button
               onClick={() => setIsExpanded(false)}
               className="w-full py-3 flex flex-col items-center shrink-0"
-            >
-              <div className="w-10 h-1 bg-gray-300 rounded-full mb-2" />
-              <div className="flex items-center gap-2">
-                <h2 className="text-sm font-semibold text-gray-900">Alertas Activas</h2>
+        >
+          <div className="w-10 h-1 bg-gray-300 rounded-full mb-2" />
+          <div className="flex items-center gap-2">
+            <h2 className="text-sm font-semibold text-gray-900">Alertas Activas</h2>
                 <span className="px-2 py-0.5 bg-orange-100 text-orange-700 rounded-full text-xs font-medium">
-                  {activeCount}
-                </span>
-              </div>
-            </button>
+              {activeCount}
+            </span>
+          </div>
+        </button>
 
             <div className="px-4 pb-4 overflow-y-auto flex-1">
-              {/* Filters */}
-              <div className="flex gap-2 mb-4 overflow-x-auto pb-2">
-                <select
-                  value={typeFilter}
-                  onChange={(e) => setTypeFilter(e.target.value as AlertType | 'all')}
-                  className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg bg-white"
-                >
-                  <option value="all">Todos los tipos</option>
-                  {Object.entries(ALERT_TYPE_LABELS).map(([value, label]) => (
-                    <option key={value} value={value}>
-                      {label}
-                    </option>
-                  ))}
-                </select>
+            {/* Filters */}
+            <div className="flex gap-2 mb-4 overflow-x-auto pb-2">
+              <select
+                value={typeFilter}
+                onChange={(e) => setTypeFilter(e.target.value as AlertType | 'all')}
+                className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg bg-white"
+              >
+                <option value="all">Todos los tipos</option>
+                {Object.entries(ALERT_TYPE_LABELS).map(([value, label]) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
+              </select>
 
-                <select
-                  value={localityFilter}
-                  onChange={(e) => setLocalityFilter(e.target.value)}
-                  className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg bg-white"
-                >
-                  <option value="all">Todas las localidades</option>
-                  {LOCALITIES.map((locality) => (
+              <select
+                value={localityFilter}
+                onChange={(e) => setLocalityFilter(e.target.value)}
+                className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg bg-white"
+              >
+                <option value="all">Todas las localidades</option>
+                {LOCALITIES.map((locality) => (
                     <option key={locality.id} value={locality.name}>
-                      {locality.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+                    {locality.name}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-              {/* Alerts */}
-              <div className="space-y-3">
-                {isLoading ? (
-                  <div className="flex items-center justify-center py-8">
+            {/* Alerts */}
+            <div className="space-y-3">
+              {isLoading ? (
+                <div className="flex items-center justify-center py-8">
                     <div className="w-8 h-8 border-2 border-orange-600/30 border-t-orange-600 rounded-full animate-spin" />
+                </div>
+              ) : filteredAlerts.length === 0 ? (
+                <div className="text-center py-8 text-gray-500">
+                  <p className="text-4xl mb-2">🔍</p>
+                  <p>No hay alertas en esta área</p>
+                </div>
+              ) : (
+                filteredAlerts.map((alert) => (
+                  <div
+                    key={alert.id}
+                    onClick={() => onAlertClick?.(alert)}
+                    className="cursor-pointer hover:shadow-md transition-shadow rounded-lg border border-gray-200"
+                  >
+                    <AlertCard alert={alert} onVote={onVote} compact />
                   </div>
-                ) : filteredAlerts.length === 0 ? (
-                  <div className="text-center py-8 text-gray-500">
-                    <p className="text-4xl mb-2">🔍</p>
-                    <p>No hay alertas en esta área</p>
-                  </div>
-                ) : (
-                  filteredAlerts.map((alert) => (
-                    <div
-                      key={alert.id}
-                      onClick={() => onAlertClick?.(alert)}
-                      className="cursor-pointer hover:shadow-md transition-shadow rounded-lg border border-gray-200"
-                    >
-                      <AlertCard alert={alert} onVote={onVote} compact />
-                    </div>
-                  ))
-                )}
+                ))
+              )}
               </div>
             </div>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
       {/* Desktop Sidebar */}
       <div className="hidden lg:block absolute top-0 right-0 h-full w-96 bg-white shadow-xl z-20 overflow-hidden">

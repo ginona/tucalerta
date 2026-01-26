@@ -85,12 +85,12 @@ export function errorHandler(
     const statusCode = ERROR_STATUS_MAP[err.code];
     if (statusCode) {
       res.status(statusCode).json({
-        error: err.message,
-        code: err.code,
-        message: err.message,
-        ...(isDevelopment && { stack: err.stack }),
-      });
-      return;
+      error: err.message,
+      code: err.code,
+      message: err.message,
+      ...(isDevelopment && { stack: err.stack }),
+    });
+    return;
     }
   }
 
