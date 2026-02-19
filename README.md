@@ -1,6 +1,8 @@
-# 🚨 TucAlerta
+# TucAlerta
 
 Sistema colaborativo de alertas ciudadanas para Tucumán, Argentina.
+
+**Demo:** https://tucalerta.vercel.app
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
@@ -9,34 +11,32 @@ Sistema colaborativo de alertas ciudadanas para Tucumán, Argentina.
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white)
 ![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=flat&logo=prisma&logoColor=white)
 
-## 🎯 Problema
+## Origen del proyecto
 
-La falta de comunicación oficial sobre zonas afectadas por lluvias e inundaciones deja a los ciudadanos tucumanos sin información para tomar decisiones. Durante emergencias climáticas, la desinformación y las fake news complican aún más la situación.
+Durante las emergencias climáticas en Tucumán, la falta de información oficial sobre zonas afectadas por lluvias e inundaciones deja a los ciudadanos sin herramientas para tomar decisiones. La desinformación y las fake news complican aún más la situación.
 
-## 💡 Solución
+Este proyecto nació como una respuesta concreta a ese problema: una plataforma donde la comunidad reporta y valida incidentes en tiempo real. Fue desarrollado con asistencia de IA como ejemplo de cómo esta tecnología puede usarse para resolver problemas reales y generar impacto positivo.
 
-Plataforma colaborativa donde la comunidad reporta y valida incidentes en tiempo real. Sistema anti-fake-news mediante validación comunitaria que permite identificar rápidamente reportes verificados y descartar información falsa.
+## Features
 
-## ✨ Features
+- Mapa interactivo con reportes geolocalizados en tiempo real
+- Sectorización por localidades de Tucumán (33 localidades)
+- Sistema de votación comunitaria (confirmar / reportar falso)
+- Auto-verificación: reportes con +3 votos positivos son verificados
+- Auto-ocultamiento: reportes con -3 votos son marcados como falsos
+- Anti-spam: límite de 1 reporte cada 45 minutos por dispositivo
+- 100% responsive, mobile-first
+- Actualizaciones automáticas cada 2 minutos
 
-- 🗺️ **Mapa interactivo** con reportes geolocalizados en tiempo real
-- 📍 **Sectorización** por localidades de Tucumán (12 localidades)
-- ✅ **Sistema de votación** comunitaria (confirmar/reportar falso)
-- 🎯 **Auto-verificación:** reportes con +3 votos positivos son verificados
-- 🚫 **Auto-ocultamiento:** reportes con -3 votos son marcados como falsos
-- 🔒 **Anti-spam:** límite de 1 reporte por hora por dispositivo
-- 📱 **100% responsive** (mobile-first design)
-- ⚡ **Actualizaciones automáticas** cada 60 segundos
-
-## 🛠️ Stack Tecnológico
+## Stack
 
 ### Frontend
 | Tecnología | Uso |
 |------------|-----|
-| React 18 | UI Library |
+| React 18 | UI |
 | Vite | Build tool |
 | TypeScript | Type safety |
-| TailwindCSS | Styling |
+| TailwindCSS | Estilos |
 | Leaflet | Mapas open source |
 | Zustand | Estado global |
 | TanStack Query | Data fetching |
@@ -45,7 +45,7 @@ Plataforma colaborativa donde la comunidad reporta y valida incidentes en tiempo
 | Tecnología | Uso |
 |------------|-----|
 | Node.js | Runtime |
-| Express | Web framework |
+| Express | Framework |
 | TypeScript | Type safety |
 | PostgreSQL | Base de datos |
 | Prisma ORM | Database client |
@@ -53,31 +53,29 @@ Plataforma colaborativa donde la comunidad reporta y valida incidentes en tiempo
 ### Infraestructura
 | Servicio | Uso |
 |----------|-----|
-| Vercel | Frontend hosting |
+| Vercel | Frontend |
 | Railway | Backend + PostgreSQL |
 | pnpm | Package manager |
-| Turborepo | Monorepo build system |
+| Turborepo | Monorepo |
 
-## 📁 Estructura del Proyecto
+## Estructura del proyecto
 
 ```
 tucalerta/
 ├── apps/
 │   ├── web/                 # Frontend React + Vite
-│   │   ├── src/
-│   │   │   ├── components/  # Map, AlertCard, AlertForm, etc.
-│   │   │   ├── hooks/       # useAlerts, useVote
-│   │   │   ├── store/       # Zustand store
-│   │   │   ├── lib/         # API client, fingerprint
-│   │   │   └── config/      # Constants, localities
-│   │   └── ...
+│   │   └── src/
+│   │       ├── components/  # Map, AlertCard, AlertForm, etc.
+│   │       ├── hooks/       # useAlerts, useVote
+│   │       ├── store/       # Zustand store
+│   │       ├── lib/         # API client, fingerprint
+│   │       └── config/      # Constantes, localidades
 │   └── api/                 # Backend Express + Prisma
 │       ├── src/
 │       │   ├── routes/      # alerts, localities
-│       │   ├── controllers/ # alertController
-│       │   ├── services/    # alertService
-│       │   ├── middleware/  # validation, rateLimit, errorHandler
-│       │   └── lib/         # prisma client
+│       │   ├── controllers/
+│       │   ├── services/
+│       │   └── middleware/  # validation, rateLimit, errorHandler
 │       └── prisma/
 │           ├── schema.prisma
 │           └── seed.ts
@@ -88,39 +86,32 @@ tucalerta/
 └── package.json
 ```
 
-## 🚀 Setup Local
+## Setup local
 
 ### Requisitos
 
-- Node.js >= 18.0.0
-- pnpm >= 8.0.0
+- Node.js >= 18
+- pnpm >= 8
 - PostgreSQL >= 14
 
-### 1. Clonar y navegar
+### 1. Clonar
 
 ```bash
-git clone https://github.com/tu-usuario/tucalerta.git
+git clone https://github.com/ginona/tucalerta.git
 cd tucalerta
 ```
 
-### 2. Crear base de datos PostgreSQL
+### 2. Crear base de datos
 
 ```sql
--- Conectarse a PostgreSQL
 psql -U postgres
-
--- Crear base de datos
 CREATE DATABASE tucalerta;
 ```
 
-### 3. Configurar variables de entorno
+### 3. Variables de entorno
 
 ```bash
-# Backend
 cp apps/api/.env.example apps/api/.env
-# Editar con tus credenciales de PostgreSQL
-
-# Frontend
 cp apps/web/.env.example apps/web/.env
 ```
 
@@ -149,90 +140,79 @@ pnpm install
 cd packages/types && pnpm build && cd ../..
 ```
 
-### 6. Configurar base de datos
+### 6. Base de datos
 
 ```bash
 cd apps/api
-
-# Generar cliente Prisma
 pnpm db:generate
-
-# Crear tablas
 pnpm db:migrate --name init
-
-# Poblar localidades
 pnpm db:seed
 ```
 
-### 7. Ejecutar en desarrollo
+### 7. Desarrollo
 
 ```bash
-# Desde la raíz (ejecuta frontend y backend)
+# Desde la raíz (frontend + backend)
 pnpm dev
 ```
 
 O en terminales separadas:
 
 ```bash
-# Terminal 1 - API
+# Terminal 1
 cd apps/api && pnpm dev
 
-# Terminal 2 - Web
+# Terminal 2
 cd apps/web && pnpm dev
 ```
 
-### 8. Acceder a la app
+### 8. URLs locales
 
-- **Frontend:** http://localhost:5173
-- **Backend:** http://localhost:3001
-- **Health check:** http://localhost:3001/health
-- **Prisma Studio:** `cd apps/api && pnpm db:studio`
+- Frontend: http://localhost:5173
+- Backend: http://localhost:3001
+- Health check: http://localhost:3001/health
+- Prisma Studio: `cd apps/api && pnpm db:studio`
 
-## 📋 Scripts Disponibles
+## Scripts disponibles
 
 | Script | Descripción |
 |--------|-------------|
-| `pnpm dev` | Ejecuta frontend y backend en desarrollo |
+| `pnpm dev` | Frontend y backend en desarrollo |
 | `pnpm build` | Compila todos los paquetes |
-| `pnpm lint` | Ejecuta linter en todo el proyecto |
+| `pnpm lint` | Linter en todo el proyecto |
 | `pnpm type-check` | Verifica tipos TypeScript |
-| `pnpm db:migrate` | Ejecuta migraciones de Prisma |
+| `pnpm db:migrate` | Ejecuta migraciones |
 | `pnpm db:studio` | Abre Prisma Studio |
-| `pnpm db:seed` | Pobla la DB con localidades |
+| `pnpm db:seed` | Carga localidades en la DB |
 | `pnpm db:reset` | Resetea la base de datos |
 
-## 🔒 Sistema Anti-Spam
+## Sistema anti-spam
 
-El sistema implementa múltiples capas de protección:
+1. **Device fingerprinting:** cada dispositivo tiene un ID único persistente
+2. **Rate limiting:** máximo 1 reporte cada 45 minutos por dispositivo
+3. **Vote limiting:** 1 voto por alerta por dispositivo
+4. **Self-vote prevention:** no se puede votar en la propia alerta
+5. **Validation score:** alertas con score <= -3 se ocultan automáticamente
 
-1. **Device Fingerprinting:** Cada dispositivo tiene un ID único persistente
-2. **Rate Limiting:** Máximo 1 reporte por hora por dispositivo
-3. **Vote Limiting:** Solo 1 voto por alerta por dispositivo
-4. **Self-Vote Prevention:** No puedes votar en tu propia alerta
-5. **Validation Score:** Alertas con score <= -3 se ocultan automáticamente
+## Deployment
 
-## 🌐 Deployment
-
-### Frontend → Vercel
+### Frontend — Vercel
 
 1. Conectar repositorio en Vercel
-2. Configurar:
-   - **Root Directory:** `apps/web`
-   - **Build Command:** `pnpm build`
-   - **Output Directory:** `dist`
-3. Agregar variable: `VITE_API_URL=https://tu-api.railway.app`
+2. Root Directory: `apps/web`
+3. Build Command: `pnpm build`
+4. Output Directory: `dist`
+5. Variable: `VITE_API_URL=https://tu-api.railway.app`
 
-### Backend → Railway
+### Backend — Railway
 
 1. Crear proyecto en Railway
 2. Agregar servicio PostgreSQL
-3. Conectar repositorio
-4. Configurar:
-   - **Root Directory:** `apps/api`
-   - Variables de entorno se configuran automáticamente
+3. Conectar repositorio, Root Directory: `apps/api`
+4. Las variables de entorno se configuran automáticamente
 5. El `railway.json` ejecuta migraciones en cada deploy
 
-## 📊 API Endpoints
+## API
 
 | Método | Ruta | Descripción |
 |--------|------|-------------|
@@ -243,33 +223,14 @@ El sistema implementa múltiples capas de protección:
 | POST | `/alerts/:id/vote` | Vota en una alerta |
 | GET | `/localities` | Lista localidades |
 
-## 🏘️ Localidades Soportadas
-
-- San Miguel de Tucumán (Capital)
-- Yerba Buena
-- Tafí Viejo
-- Banda del Río Salí
-- Las Talitas
-- Alderetes
-- Concepción
-- Monteros
-- Famaillá
-- Aguilares
-- Lules
-- Simoca
-
-## 🤝 Contribuir
+## Contribuir
 
 1. Fork el repositorio
-2. Crea tu branch (`git checkout -b feature/nueva-feature`)
-3. Commit tus cambios (`git commit -m 'Add nueva feature'`)
-4. Push al branch (`git push origin feature/nueva-feature`)
+2. Crea tu branch: `git checkout -b feature/nueva-feature`
+3. Commit: `git commit -m 'Add nueva feature'`
+4. Push: `git push origin feature/nueva-feature`
 5. Abre un Pull Request
 
-## 📄 Licencia
+## Licencia
 
-MIT
-
----
-
-Hecho con ❤️ para Tucumán, Argentina
+MIT — Hecho para Tucumán, Argentina
